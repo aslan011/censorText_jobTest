@@ -10,4 +10,4 @@ test('can output True, with puncutation and upper/lower cases', () => {
 
 test('works with numbers in the string', () => {
     expect(palindromeCheck('12 35 10 01 53 21')).toBe(true);
-})
+});

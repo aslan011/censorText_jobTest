@@ -10,4 +10,4 @@ test('function is caps insensitive', () => {
 
 test('punctuation does not break the function', () => {
     expect(countOccurances('e', 'I don\'t have anymore cheese')).toBe(5)
-})
+});
