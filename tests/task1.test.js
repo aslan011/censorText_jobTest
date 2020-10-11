@@ -1,4 +1,4 @@
-import { countOccurances } from '../task'
+import { countOccurances } from '../task';
 
 test('counts the number of occurrences of a given letter in a string', () => {
     expect(countOccurances('e', 'I have some cheese')).toBe(5);
@@ -9,5 +9,5 @@ test('function is caps insensitive', () => {
 });
 
 test('punctuation does not break the function', () => {
-    expect(countOccurances('e', 'I don\'t have anymore cheese')).toBe(5)
+    expect(countOccurances('e', 'I don\'t have anymore cheese')).toBe(5);
 });

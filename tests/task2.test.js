@@ -1,4 +1,4 @@
-import { palindromeCheck } from '../task'
+import { palindromeCheck } from '../task';
 
 test('checks is a string is a palindrome', () => {
     expect(palindromeCheck('I have some cheese')).toBe(false);

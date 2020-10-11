@@ -21,10 +21,10 @@ function palindromeCheck(str) {
     str
         .toLowerCase()
         .split('')
-        .forEach((letter) => {
-            if (letter.toLowerCase() !== letter.toUpperCase()) {
-                strArray.push(letter);
-                reverseStr.unshift(letter);
+        .forEach((char) => {
+            if (char.toLowerCase() !== char.toUpperCase()) {
+                strArray.push(char);
+                reverseStr.unshift(char);
             }
         });
 
@@ -49,30 +49,50 @@ function mask(str) {
     return cleanedArr.join('') + symbol;
 };
 
-/*  Could have used a class here, however I prefer using a function, as it is easier to understand the main function.
+/*  Could have used a class or contructor design pattern here, however I prefer using a factory pattern.
     Creates an empty object which will contain the censor words (lowered case), initally all values (occurances) are set to 0. 
 */
-function censorApp(censors, string) {
-    const censorsObj = {};
+const censorApp = (censorWords, stringText) => {
+    const strArray = stringText.split(' ');
+    let censors = censorWords;
+    let string = stringText;
 
-    censors.forEach((censor) => {
-        censorsObj[censor.toLowerCase()] = 0;
-    });
+    return {
 
-    const strArray = string.split(' ');
+    getCensors() {
+        return censors
+    },
+
+    getString() {
+        return string
+    },
+
+    changeSensors (censorWords) {
+        return censors = censorWords
+    },
+
+    changeString (stringText) {
+        return string = stringText
+    },
 
     /*  loops through each word in the given text and checks if it matches (or partially matches) the censor word 
     */
-    this.censorCount = () => {
+    censorCount () {
+        const censorsObj = {};
+
+        censors.forEach((censor) => {
+            censorsObj[censor.toLowerCase()] = 0;
+        });
+
         strArray.forEach((word) => {
-            Object.keys(censorsObj).forEach((censor) => {
-                if (word.toLowerCase().includes(censor)) {
-                    censorsObj[censor] += 1;
+            censors.forEach((censor) => {
+                if (word.toLowerCase().includes(censor.toLowerCase())) {
+                    censorsObj[censor.toLowerCase()] += 1;
                 }
             });
         });
         return (censorsObj);
-    };
+    },
 
     /*  Creates an array of masked word (where required), like the above, check if the word matches the
         censor word and if so, passes the word to the mask function.
@@ -80,20 +100,20 @@ function censorApp(censors, string) {
         I chose to pass the whole word to the mask function, instead of just the matched characters.
         This was based on my personal view of how the application would work.
     */  
-    this.censorMask = () => {
+    censorMask () {
         const maskedArr = strArray.map((word) => {
-            if (Object.keys(censorsObj).some((censor) => word.toLowerCase().includes(censor))) {
+            if (censors.some((censor) => word.toLowerCase().includes(censor.toLowerCase()))) {
                 return mask(word);
             }
             return word;
         });
         return (maskedArr.join(' '));
-    };
+    },
 
     /*  Uses the palindromeCheck function to loop through the given text, checking for palindromes.
         If a palindrome is found, the word is passed to the mask function.
     */
-    this.censorPalindrome = () => {
+    censorPalindrome() {
         const maskedArr = strArray.map((word) => {
             if (palindromeCheck(word)) {
                 return mask(word);
@@ -101,7 +121,7 @@ function censorApp(censors, string) {
             return word;
         });
         return (maskedArr.join(' '));
-    };
+    }};
 };
 
 export {
