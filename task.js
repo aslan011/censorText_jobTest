@@ -42,6 +42,7 @@ function mask(str) {
     let symbol = '';
     const tempArr = str.split('');
     const cleanedArr = str.replace(/[^\w]/g, '').split('');
+    console.log(cleanedArr)
     if (tempArr[tempArr.length - 1].toLowerCase() === tempArr[tempArr.length - 1].toUpperCase()) {
         symbol = tempArr.pop();
     }
@@ -49,9 +50,7 @@ function mask(str) {
     return cleanedArr.join('') + symbol;
 };
 
-/*  Could have used a class or contructor design pattern here, however I prefer using a factory pattern.
-    Creates an empty object which will contain the censor words (lowered case), initally all values (occurances) are set to 0. 
-*/
+//  Could have used a class or contructor design pattern here, however I prefer using a factory pattern.
 const censorApp = (censorWords, stringText) => {
     const strArray = stringText.split(' ');
     let censors = censorWords;
@@ -75,7 +74,8 @@ const censorApp = (censorWords, stringText) => {
         return string = stringText
     },
 
-    /*  loops through each word in the given text and checks if it matches (or partially matches) the censor word 
+    /*  Loops through each word in the given text and checks if it matches (or partially matches) the censor word.
+        Creates an empty object which will contain the censor words (lowered case), initally all values (occurances) are set to 0. 
     */
     censorCount () {
         const censorsObj = {};
